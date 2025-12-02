@@ -1,5 +1,6 @@
 import { Box, Card, IconButton, Tooltip, Typography } from "@mui/joy";
 import type { FunctionComponent, MouseEvent } from "react";
+import { IoIosLink } from "react-icons/io";
 import { IoStar, IoStarOutline } from "react-icons/io5";
 import { config } from "../config";
 import type { Link } from "../models/link";
@@ -54,7 +55,9 @@ const LinkCard: FunctionComponent<LinkCardProps> = ({ link }) => {
   };
 
   const renderIcon = () => {
-    if (!link.icon) return null;
+    if (!link.icon) {
+      return <IoIosLink size={28} />;
+    }
 
     if (isDevicon(link.icon)) {
       const { name, variant, usesSvg } = parseDevicon(link.icon);
@@ -173,23 +176,21 @@ const LinkCard: FunctionComponent<LinkCardProps> = ({ link }) => {
       </Tooltip>
 
       {/* Icon */}
-      {link.icon && (
-        <Box
-          sx={{
-            width: 56,
-            height: 56,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: "lg",
-            backgroundColor: "background.level2",
-            fontSize: "1.75rem",
-            mb: 2,
-          }}
-        >
-          {renderIcon()}
-        </Box>
-      )}
+      <Box
+        sx={{
+          width: 56,
+          height: 56,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "lg",
+          backgroundColor: "background.level2",
+          fontSize: "1.75rem",
+          mb: 2,
+        }}
+      >
+        {renderIcon()}
+      </Box>
 
       {/* Title */}
       <Typography level="title-lg" fontWeight={600} sx={{ mb: 0.5, pr: 4 }}>
