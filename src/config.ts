@@ -1,11 +1,25 @@
+import type { Config } from "./models/config";
 import type { Link } from "./models/link";
 
 // Company branding configuration
-export const config = {
+export const config: Config = {
   companyName: "Acme Corp",
   companyLogo: "/logo.svg", // Place your logo in the public folder
   githubEditUrl:
     "https://github.com/your-org/developer-portal/edit/main/src/config.ts",
+
+  // Sorting options
+  categorySorting: "alphabetical",
+  linkSorting: "defined",
+
+  // Optional: Define category order when categorySorting is "defined"
+  // categories: ["Development", "DevOps", "Infrastructure", "Observability", "Databases", "Documentation", "Project Management", "Communication", "Design"],
+
+  // Grid layout
+  gridColumns: 4,
+
+  // How links open: "same-tab", "new-tab", or "new-window"
+  linkTarget: "new-tab",
 };
 
 // Developer portal links
@@ -14,28 +28,31 @@ export const links: Link[] = [
   {
     href: "https://github.com/example-org",
     title: "GitHub",
-    description: "Source code repositories and collaboration",
+    description:
+      "Central hub for all source code repositories, pull requests, code reviews, and team collaboration. Includes CI/CD workflows and project management.",
     icon: "devicon/github-original",
     category: "Development",
   },
   {
     href: "https://gitlab.example.com",
     title: "GitLab",
-    description: "GitLab instance for internal projects",
+    description:
+      "Self-hosted GitLab instance for internal and confidential projects that require additional security and compliance measures.",
     icon: "devicon/gitlab-original",
     category: "Development",
   },
   {
     href: "https://sonarqube.example.com",
     title: "SonarQube",
-    description: "Code quality and security analysis",
+    description:
+      "Continuous code quality inspection tool that performs automatic reviews to detect bugs, vulnerabilities, and code smells in your codebase.",
     icon: "devicon/sonarqube-original",
     category: "Development",
   },
   {
     href: "https://npm.example.com",
     title: "npm Registry",
-    description: "Private npm package registry",
+    description: "Private npm package registry for internal packages",
     icon: "devicon/npm-original-wordmark",
     category: "Development",
   },
@@ -44,7 +61,8 @@ export const links: Link[] = [
   {
     href: "https://argocd.example.com",
     title: "ArgoCD",
-    description: "GitOps continuous delivery for Kubernetes",
+    description:
+      "Declarative GitOps continuous delivery tool for Kubernetes. Automatically syncs your cluster state with your Git repository.",
     icon: "devicon/argocd-original",
     category: "DevOps",
   },
@@ -58,7 +76,8 @@ export const links: Link[] = [
   {
     href: "https://terraform.example.com",
     title: "Terraform Cloud",
-    description: "Infrastructure as code management",
+    description:
+      "Infrastructure as code management platform. Define, provision, and manage cloud infrastructure using declarative configuration files.",
     icon: "devicon/terraform-original",
     category: "DevOps",
   },
@@ -74,7 +93,8 @@ export const links: Link[] = [
   {
     href: "https://kubernetes.example.com",
     title: "Kubernetes Dashboard",
-    description: "Container orchestration dashboard",
+    description:
+      "Web-based UI for managing containerized applications. View cluster resources, deploy apps, and troubleshoot workloads.",
     icon: "devicon/kubernetes-original",
     category: "Infrastructure",
   },

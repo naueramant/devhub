@@ -35,7 +35,6 @@ const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
           },
           "&:focus-within": {
             borderColor: "primary.500",
-            boxShadow: "0 0 0 3px var(--joy-palette-primary-100)",
           },
         }}
         startDecorator={

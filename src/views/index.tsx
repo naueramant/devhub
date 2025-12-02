@@ -116,7 +116,7 @@ const IndexView: FunctionComponent = () => {
       >
         <Box
           sx={{
-            maxWidth: 1100,
+            maxWidth: 1400,
             mx: "auto",
           }}
         >

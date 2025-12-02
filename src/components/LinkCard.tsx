@@ -1,6 +1,7 @@
-import { Box, Card, IconButton, Typography } from "@mui/joy";
+import { Box, Card, IconButton, Tooltip, Typography } from "@mui/joy";
 import type { FunctionComponent, MouseEvent } from "react";
 import { IoStar, IoStarOutline } from "react-icons/io5";
+import { config } from "../config";
 import type { Link } from "../models/link";
 import { useFavoritesStore } from "../stores/favorites";
 
@@ -103,21 +104,41 @@ const LinkCard: FunctionComponent<LinkCardProps> = ({ link }) => {
     return link.icon;
   };
 
+  const getLinkTarget = () => {
+    const target = config.linkTarget ?? "new-tab";
+    if (target === "same-tab") return "_self";
+    if (target === "new-window") return "_blank";
+    return "_blank"; // new-tab
+  };
+
+  const handleClick = (e: MouseEvent) => {
+    if (config.linkTarget === "new-window") {
+      e.preventDefault();
+      window.open(
+        link.href,
+        "_blank",
+        "noopener,noreferrer,width=1200,height=800"
+      );
+    }
+  };
+
   return (
     <Card
       component="a"
       href={link.href}
-      target="_blank"
+      target={getLinkTarget()}
       rel="noopener noreferrer"
+      onClick={handleClick}
       variant="outlined"
       sx={{
         textDecoration: "none",
         transition: "all 0.2s ease-in-out",
         cursor: "pointer",
-        p: 2.5,
+        p: 3,
         borderRadius: "xl",
         backgroundColor: "background.surface",
         borderColor: "divider",
+        position: "relative",
         "&:hover": {
           borderColor: "primary.400",
           transform: "translateY(-4px)",
@@ -126,73 +147,71 @@ const LinkCard: FunctionComponent<LinkCardProps> = ({ link }) => {
         },
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        {link.icon && (
-          <Box
-            sx={{
-              width: 48,
-              height: 48,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "lg",
-              backgroundColor: "background.level2",
-              fontSize: "1.5rem",
-              flexShrink: 0,
-            }}
-          >
-            {renderIcon()}
-          </Box>
-        )}
-        <Box sx={{ flex: 1, minWidth: 0 }}>
-          <Typography level="title-md" fontWeight={600}>
-            {link.title}
-          </Typography>
-          {link.description && (
-            <Typography
-              level="body-sm"
-              sx={{
-                color: "text.tertiary",
-                mt: 0.5,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {link.description}
-            </Typography>
-          )}
-        </Box>
+      {/* Favorite button - top right */}
+      <Tooltip
+        title={favorite ? "Remove from favorites" : "Add to favorites"}
+        placement="top"
+      >
         <IconButton
           variant="plain"
           color={favorite ? "warning" : "neutral"}
           size="sm"
           onClick={handleFavoriteClick}
           sx={{
-            opacity: favorite ? 1 : 0,
+            position: "absolute",
+            top: 12,
+            right: 12,
+            opacity: favorite ? 1 : 0.4,
             transition: "opacity 0.2s",
-            ".MuiCard-root:hover &": {
+            "&:hover": {
               opacity: 1,
             },
           }}
         >
           {favorite ? <IoStar /> : <IoStarOutline />}
         </IconButton>
+      </Tooltip>
+
+      {/* Icon */}
+      {link.icon && (
         <Box
           sx={{
-            color: "text.tertiary",
-            fontSize: "1.2rem",
-            opacity: 0.5,
-            transition: "all 0.2s",
-            ".MuiCard-root:hover &": {
-              opacity: 1,
-              transform: "translateX(4px)",
-            },
+            width: 56,
+            height: 56,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "lg",
+            backgroundColor: "background.level2",
+            fontSize: "1.75rem",
+            mb: 2,
           }}
         >
-          →
+          {renderIcon()}
         </Box>
-      </Box>
+      )}
+
+      {/* Title */}
+      <Typography level="title-lg" fontWeight={600} sx={{ mb: 0.5, pr: 4 }}>
+        {link.title}
+      </Typography>
+
+      {/* Description */}
+      {link.description && (
+        <Typography
+          level="body-sm"
+          sx={{
+            color: "text.tertiary",
+            lineHeight: 1.6,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {link.description}
+        </Typography>
+      )}
     </Card>
   );
 };
