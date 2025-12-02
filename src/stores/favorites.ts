@@ -20,7 +20,7 @@ export const useFavoritesStore = create<FavoritesState>()(
         })),
     }),
     {
-      name: "developer-portal-favorites",
+      name: "developer-hub-favorites",
     }
   )
 );

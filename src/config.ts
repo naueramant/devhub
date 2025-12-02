@@ -5,8 +5,7 @@ import type { Link } from "./models/link";
 export const config: Config = {
   companyName: "Acme Corp and something",
   companyLogo: "/logo.svg", // Place your logo in the public folder
-  githubEditUrl:
-    "https://github.com/your-org/developer-portal/edit/main/src/config.ts",
+  githubEditUrl: "https://github.com/naueramant/devhub/edit/main/src/config.ts",
 
   // Sorting options
   categorySorting: "alphabetical",
@@ -16,7 +15,7 @@ export const config: Config = {
   // categories: ["Development", "DevOps", "Infrastructure", "Observability", "Databases", "Documentation", "Project Management", "Communication", "Design"],
 
   // Grid layout
-  gridColumns: 4,
+  gridColumns: 3,
 
   // How links open: "same-tab", "new-tab", or "new-window"
   linkTarget: "new-tab",
@@ -233,6 +232,20 @@ export const links: Link[] = [
     title: "Slack",
     description: "Team communication and messaging",
     icon: "devicon/slack-original",
+    category: "Communication",
+  },
+  {
+    href: "https://teams.example.com",
+    title: "Microsoft Teams",
+    description: "Video conferencing and team collaboration",
+    icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Microsoft_Teams.png/645px-Microsoft_Teams.png",
+    category: "Communication",
+  },
+  {
+    href: "https://twitter.com/example",
+    title: "Twitter",
+    description: "Company Twitter account and social media updates",
+    icon: "devicon/twitter-original",
     category: "Communication",
   },
 

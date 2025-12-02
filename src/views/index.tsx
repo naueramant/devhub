@@ -151,7 +151,7 @@ const IndexView: FunctionComponent = () => {
             }}
           >
             <Typography level="h1" sx={{ mb: 1.5, fontWeight: 700 }}>
-              Developer Portal
+              Developer Hub
             </Typography>
             <Typography
               level="body-lg"
