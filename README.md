@@ -1,7 +1,10 @@
 # DevHub
-<center>
+
+<p align="center">
   <img src="assets/screenshot.png" alt="DevHub Screenshot" width="600" style="border-radius: 12px;"/>
-</center>
+</p>
+
+[Live Demo](https://naueramant.github.io/devhub/)
 
 ## Features
 
@@ -51,9 +54,9 @@ All configuration is done in `src/config.ts`. Here's an overview of the availabl
 
 ```typescript
 export const config: Config = {
-  companyName: "Acme Corp",           // Optional: Company name in header
-  companyLogo: "/logo.svg",           // Optional: Logo path (in public folder)
-  githubEditUrl: "https://...",       // Optional: Link to edit config on GitHub
+  companyName: "Acme Corp", // Optional: Company name in header
+  companyLogo: "/logo.svg", // Optional: Logo path (in public folder)
+  githubEditUrl: "https://...", // Optional: Link to edit config on GitHub
 };
 ```
 
@@ -63,11 +66,11 @@ export const config: Config = {
 export const config: Config = {
   // ...branding options
 
-  categorySorting: "alphabetical",    // "alphabetical" | "defined"
-  linkSorting: "defined",             // "alphabetical" | "defined"
-  categories: ["Dev", "DevOps"],      // Optional: Custom category order
-  gridColumns: 4,                     // Number of columns (default: 4)
-  linkTarget: "new-tab",              // "same-tab" | "new-tab" | "new-window"
+  categorySorting: "alphabetical", // "alphabetical" | "defined"
+  linkSorting: "defined", // "alphabetical" | "defined"
+  categories: ["Dev", "DevOps"], // Optional: Custom category order
+  gridColumns: 4, // Number of columns (default: 4)
+  linkTarget: "new-tab", // "same-tab" | "new-tab" | "new-window"
 };
 ```
 
@@ -80,10 +83,10 @@ export const links: Link[] = [
   {
     href: "https://github.com/your-org",
     title: "GitHub",
-    description: "Source code repositories",  // Optional
-    icon: "devicon/github-original",           // Optional (shows link icon if omitted)
-    category: "Development",                   // Optional (defaults to "Other")
-    tags: ["git", "code"],                     // Optional: For filtering
+    description: "Source code repositories", // Optional
+    icon: "devicon/github-original", // Optional (shows link icon if omitted)
+    category: "Development", // Optional (defaults to "Other")
+    tags: ["git", "code"], // Optional: For filtering
   },
   // ... more links
 ];
@@ -100,6 +103,7 @@ The `icon` field supports multiple formats:
 3. **Emoji**: `"🚀"`
 
 For devicon, use the format `devicon/{name}-{style}` where style is:
+
 - `original` - Colored SVG
 - `plain` - Monochrome font icon
 - `line` - Outline font icon
