@@ -32,6 +32,7 @@ export const links: Link[] = [
       "Central hub for all source code repositories, pull requests, code reviews, and team collaboration. Includes CI/CD workflows and project management.",
     icon: "devicon/github-original",
     category: "Development",
+    tags: ["git", "code-review", "ci-cd"],
   },
   {
     href: "https://gitlab.example.com",
@@ -40,6 +41,7 @@ export const links: Link[] = [
       "Self-hosted GitLab instance for internal and confidential projects that require additional security and compliance measures.",
     icon: "devicon/gitlab-original",
     category: "Development",
+    tags: ["git", "code-review", "ci-cd", "self-hosted"],
   },
   {
     href: "https://sonarqube.example.com",
@@ -48,6 +50,7 @@ export const links: Link[] = [
       "Continuous code quality inspection tool that performs automatic reviews to detect bugs, vulnerabilities, and code smells in your codebase.",
     icon: "devicon/sonarqube-original",
     category: "Development",
+    tags: ["code-quality", "security", "ci-cd"],
   },
   {
     href: "https://npm.example.com",
@@ -55,6 +58,7 @@ export const links: Link[] = [
     description: "Private npm package registry for internal packages",
     icon: "devicon/npm-original-wordmark",
     category: "Development",
+    tags: ["packages", "javascript", "self-hosted"],
   },
 
   // DevOps & CI/CD
@@ -65,6 +69,7 @@ export const links: Link[] = [
       "Declarative GitOps continuous delivery tool for Kubernetes. Automatically syncs your cluster state with your Git repository.",
     icon: "devicon/argocd-original",
     category: "DevOps",
+    tags: ["kubernetes", "gitops", "ci-cd"],
   },
   {
     href: "https://jenkins.example.com",
@@ -72,6 +77,7 @@ export const links: Link[] = [
     description: "CI/CD pipelines and automation",
     icon: "devicon/jenkins-original",
     category: "DevOps",
+    tags: ["ci-cd", "automation", "self-hosted"],
   },
   {
     href: "https://terraform.example.com",
@@ -80,6 +86,7 @@ export const links: Link[] = [
       "Infrastructure as code management platform. Define, provision, and manage cloud infrastructure using declarative configuration files.",
     icon: "devicon/terraform-original",
     category: "DevOps",
+    tags: ["iac", "cloud", "automation"],
   },
   {
     href: "https://ansible.example.com",
@@ -87,6 +94,7 @@ export const links: Link[] = [
     description: "Automation and configuration management",
     icon: "devicon/ansible-original",
     category: "DevOps",
+    tags: ["automation", "configuration", "self-hosted"],
   },
 
   // Infrastructure & Cloud

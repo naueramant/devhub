@@ -1,4 +1,4 @@
-import { Box, Chip, Typography } from "@mui/joy";
+import { Box, Chip, Link as MuiLink, Typography } from "@mui/joy";
 import type { FunctionComponent } from "react";
 import { IoSearchOutline, IoStar } from "react-icons/io5";
 import { config } from "../config";
@@ -9,9 +9,14 @@ import LinkCard from "./LinkCard";
 interface LinkGridProps {
   links: Link[];
   searchQuery: string;
+  selectedTags?: string[];
 }
 
-const LinkGrid: FunctionComponent<LinkGridProps> = ({ links, searchQuery }) => {
+const LinkGrid: FunctionComponent<LinkGridProps> = ({
+  links,
+  searchQuery,
+  selectedTags = [],
+}) => {
   const { favorites } = useFavoritesStore();
 
   // Calculate minimum column width based on grid columns (default 4)
@@ -20,11 +25,19 @@ const LinkGrid: FunctionComponent<LinkGridProps> = ({ links, searchQuery }) => {
 
   const filteredLinks = links.filter((link) => {
     const query = searchQuery.toLowerCase();
-    return (
+    const matchesQuery =
       link.title.toLowerCase().includes(query) ||
       link.description?.toLowerCase().includes(query) ||
-      link.category?.toLowerCase().includes(query)
-    );
+      link.category?.toLowerCase().includes(query) ||
+      link.tags?.some((tag) => tag.toLowerCase().includes(query));
+
+    const matchesTags =
+      selectedTags.length === 0 ||
+      selectedTags.every((tag) =>
+        link.tags?.some((t) => t.toLowerCase() === tag.toLowerCase())
+      );
+
+    return matchesQuery && matchesTags;
   });
 
   if (filteredLinks.length === 0) {
@@ -46,6 +59,19 @@ const LinkGrid: FunctionComponent<LinkGridProps> = ({ links, searchQuery }) => {
         <Typography level="body-md" sx={{ color: "text.tertiary" }}>
           No links found matching "{searchQuery}"
         </Typography>
+        {config.githubEditUrl && (
+          <Typography level="body-sm" sx={{ color: "text.tertiary", mt: 1 }}>
+            Think something is missing?{" "}
+            <MuiLink
+              href={config.githubEditUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              level="body-sm"
+            >
+              Add it on GitHub
+            </MuiLink>
+          </Typography>
+        )}
       </Box>
     );
   }

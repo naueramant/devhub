@@ -1,14 +1,18 @@
 import { Box, Typography } from "@mui/joy";
 import { useEffect, useRef, useState, type FunctionComponent } from "react";
-import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LinkGrid from "../components/LinkGrid";
 import SearchBar from "../components/SearchBar";
+import TagFilter from "../components/TagFilter";
 import { config, links } from "../config";
-import { useQueryParamState } from "../hooks/useQueryParamState";
+import {
+  useQueryParamArrayState,
+  useQueryParamState,
+} from "../hooks/useQueryParamState";
 
 const IndexView: FunctionComponent = () => {
   const [searchQuery, setSearchQuery] = useQueryParamState("q");
+  const [selectedTags, setSelectedTags] = useQueryParamArrayState("tags");
   const [showStickySearch, setShowStickySearch] = useState(false);
   const heroSearchRef = useRef<HTMLDivElement>(null);
   const stickyInputRef = useRef<HTMLInputElement>(null);
@@ -165,10 +169,24 @@ const IndexView: FunctionComponent = () => {
                 value={searchQuery}
                 onChange={setSearchQuery}
               />
+              <TagFilter
+                links={links}
+                selectedTags={selectedTags}
+                onTagToggle={(tag) =>
+                  setSelectedTags(
+                    selectedTags.includes(tag)
+                      ? selectedTags.filter((t) => t !== tag)
+                      : [...selectedTags, tag]
+                  )
+                }
+              />
             </Box>
           </Box>
-          <LinkGrid links={links} searchQuery={searchQuery} />
-          <Footer />
+          <LinkGrid
+            links={links}
+            searchQuery={searchQuery}
+            selectedTags={selectedTags}
+          />
         </Box>
       </Box>
     </Box>

@@ -13,4 +13,9 @@ export interface Link {
    */
   icon?: string;
   category?: string;
+  /**
+   * Optional tags for filtering and categorization.
+   * Tags are displayed as chips and can be clicked to filter links.
+   */
+  tags?: string[];
 }
