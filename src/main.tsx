@@ -1,6 +1,7 @@
 import { Box, CssBaseline, CssVarsProvider, styled } from "@mui/joy";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import HydrationGate from "./components/HydrationGate";
 import "./index.scss";
 import theme from "./theme";
 import IndexView from "./views";
@@ -14,6 +15,8 @@ const Main = styled(Box)({
   color: "var(--joy-palette-text-primary)",
 });
 
+// Component that waits for zustand stores to hydrate before rendering children
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <CssVarsProvider
@@ -23,7 +26,9 @@ createRoot(document.getElementById("root")!).render(
     >
       <CssBaseline />
       <Main>
-        <IndexView />
+        <HydrationGate>
+          <IndexView />
+        </HydrationGate>
       </Main>
     </CssVarsProvider>
   </StrictMode>

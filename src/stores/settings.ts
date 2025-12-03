@@ -13,9 +13,11 @@ export interface UserSettings {
 
 interface SettingsState {
   settings: UserSettings | null; // null means use defaults from config
+  _hasHydrated: boolean;
   getEffectiveSettings: () => UserSettings;
   setSettings: (settings: UserSettings) => void;
   resetToDefaults: () => void;
+  setHasHydrated: (state: boolean) => void;
 }
 
 export const getDefaultSettings = (): UserSettings => ({
@@ -30,15 +32,20 @@ export const useSettingsStore = create<SettingsState>()(
   persist(
     (set, get) => ({
       settings: null,
+      _hasHydrated: false,
       getEffectiveSettings: () => {
         const userSettings = get().settings;
         return userSettings ?? getDefaultSettings();
       },
       setSettings: (settings: UserSettings) => set({ settings }),
       resetToDefaults: () => set({ settings: null }),
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
     }),
     {
       name: "devhub-settings",
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
     }
   )
 );
